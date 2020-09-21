@@ -152,6 +152,15 @@ http://engblog.yext.com/post/js-type-checking
 can you write your own "new" operator?
 https://2ality.com/2014/01/new-operator.html
 
+function newOperator(Constr, args) {
+	var thisValue = Object.create(Constr.prototype); 
+	var result = Constr.apply(thisValue, args);
+	if (typeof result === 'object' && result !== null) {
+		return result; 
+	}
+	return thisValue;
+}
+
 8. sort a object by key; 
 ex: 
 {
